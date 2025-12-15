@@ -1,23 +1,24 @@
 // db/pool.js
 // ------------------------------------------------------
-// Creates a MySQL connection pool using environment variables
+// Creates a reusable MySQL connection pool.
+// All controllers import { pool } from here and do:
+//   const [rows] = await pool.query(sql, params);
 // ------------------------------------------------------
 
-// Load environment variables
-dotenv.config();
-
-// Create pool
 const mysql = require("mysql2/promise");
 
+// Read DB settings from environment variables (Railway Variables)
 const pool = mysql.createPool({
-  host: process.env.MYSQLHOST || process.env.DB_HOST || "localhost",
-  port: Number(process.env.MYSQLPORT || process.env.DB_PORT || 3306),
-  user: process.env.MYSQLUSER || process.env.DB_USER,
-  password: process.env.MYSQLPASSWORD || process.env.DB_PASSWORD,
-  database: process.env.MYSQLDATABASE || process.env.DB_NAME,
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  port: Number(process.env.DB_PORT || 3306),
+
+  // These help a lot in production
   waitForConnections: true,
   connectionLimit: 10,
+  queueLimit: 0
 });
 
 module.exports = { pool };
-
