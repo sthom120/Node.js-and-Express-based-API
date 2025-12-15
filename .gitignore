@@ -1,0 +1,10 @@
+node_modules/
+.env
+.env.*
+*.log
+ssl/
+*.pem
+.vscode/
+.DS_Store
+Thumbs.db
+res/posters/
