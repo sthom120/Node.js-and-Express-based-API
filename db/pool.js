@@ -3,9 +3,6 @@
 // Creates a MySQL connection pool using environment variables
 // ------------------------------------------------------
 
-const mysql = require("mysql2/promise");
-const dotenv = require("dotenv");
-
 // Load environment variables
 dotenv.config();
 
