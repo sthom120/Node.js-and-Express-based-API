@@ -1,9 +1,9 @@
 // controllers/postersController.js
-// ------------------------------------------------------
+// ......................................
 // Poster upload + retrieval (per-user posters)
 // - GET  /posters/:imdbID
 // - POST /posters/add/:imdbID  (raw image/png body)
-// ------------------------------------------------------
+// .......................................
 
 const fs = require("fs");
 const path = require("path");
@@ -16,8 +16,8 @@ const POSTER_DIR = path.join(__dirname, "..", "res", "posters");
 fs.mkdirSync(POSTER_DIR, { recursive: true });
 
 // ------------------------------------------------------
-// Helper: get user email from Authorization: Bearer <token>
-// - If header is missing or token is invalid -> return null
+// Helper: get user email from Authorization: Bearer token
+// - If header is missing or token is invalid it should return null
 // ------------------------------------------------------
 function getEmailFromAuthHeader(authHeader) {
   try {
@@ -28,20 +28,20 @@ function getEmailFromAuthHeader(authHeader) {
 
     const token = parts[1];
 
-    // Verify token and read the payload
+    // Verify token and read
     const payload = jwt.verify(token, process.env.JWT_SECRET);
 
-    // We store email in the token payload during login
+    // store email in the token payload during login
     return payload.email || null;
   } catch {
     return null;
   }
 }
 
-// ------------------------------------------------------
+// ......................................................
 // GET /posters/:imdbID
 // Returns the user's saved poster (PNG) for that imdbID
-// ------------------------------------------------------
+// ......................................................
 exports.getPoster = async (req, res) => {
   try {
     const { imdbID } = req.params;
@@ -80,10 +80,10 @@ exports.getPoster = async (req, res) => {
   }
 };
 
-// ------------------------------------------------------
+// .......................................................
 // POST /posters/add/:imdbID
 // Upload a PNG (raw binary)
-// ------------------------------------------------------
+// ........................................................
 exports.uploadPoster = async (req, res) => {
   try {
     const { imdbID } = req.params;
@@ -117,7 +117,7 @@ exports.uploadPoster = async (req, res) => {
     const filename = `${imdbID}_${email}.png`;
     const filepath = path.join(POSTER_DIR, filename);
 
-    // req.body is a Buffer because server.js uses express.raw() for /posters
+    
     await fs.promises.writeFile(filepath, req.body);
 
     return res.status(200).json({

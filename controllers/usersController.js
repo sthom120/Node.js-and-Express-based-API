@@ -1,9 +1,13 @@
 // controllers/usersController.js
-// ------------------------------------------------------
+// .......................................................
 // User endpoints for Swagger
 // - POST /user/register   -> create a user
 // - POST /user/login      -> login and receive a Bearer token (JWT)
-// ------------------------------------------------------
+// .......................................................  
+// User endpoints for Swagger
+// - POST /user/register   -> create a user
+// - POST /user/login      -> login and receive a Bearer token (JWT)
+// .......................................................
 
 const { pool } = require("../db/pool");
 const bcrypt = require("bcrypt");
@@ -20,10 +24,10 @@ function sendError(res, status, message) {
   });
 }
 
-// ------------------------------------------------------
+//........................ .......................................
 // POST /user/register
 // Body: { "email": "...", "password": "..." }
-// ------------------------------------------------------
+//................................................................
 exports.register = async (req, res, next) => {
   try {
     const { email, password } = req.body || {};
@@ -70,10 +74,10 @@ exports.register = async (req, res, next) => {
   }
 };
 
-// ------------------------------------------------------
+// .......................................................
 // POST /user/login
 // Body: { "email": "...", "password": "..." }
-// ------------------------------------------------------
+// .......................................................
 exports.login = async (req, res, next) => {
   try {
     const { email, password } = req.body || {};

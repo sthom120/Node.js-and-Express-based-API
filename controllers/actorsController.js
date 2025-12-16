@@ -1,16 +1,17 @@
 // controllers/actorsController.js
-// ------------------------------------------------------
+// ......................................................
 // Actor endpoints
-// - GET /actors        -> list some actors
+// - GET /actors        -> list a few actors
 // - GET /actors/:id    -> single actor by nconst
-// ------------------------------------------------------
+//  ......................................................
+
 
 const { pool } = require("../db/pool");
 
-// GET /actors
+// GET /actors - basic list
 exports.getAllActors = async (req, res, next) => {
   try {
-    // Keep it simple for now: just return the first 50 actors
+    // just return the first 50 actors
     const [rows] = await pool.query(`
       SELECT nconst, primaryName, primaryProfession, knownForTitles
       FROM names

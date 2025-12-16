@@ -1,9 +1,9 @@
 // db/pool.js
-// ------------------------------------------------------
+// .......................................................
 // Creates a reusable MySQL connection pool.
 // All controllers import { pool } from here and do:
 //   const [rows] = await pool.query(sql, params);
-// ------------------------------------------------------
+// .......................................................
 
 const mysql = require("mysql2/promise");
 

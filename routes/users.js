@@ -1,7 +1,7 @@
 // routes/users.js
-// ------------------------------------------------------
-// User authentication routes (register + login)
-// ------------------------------------------------------
+// .......................................................
+// User authentication routes (register and login)
+// .......................................................
 
 const express = require("express");
 const router = express.Router();

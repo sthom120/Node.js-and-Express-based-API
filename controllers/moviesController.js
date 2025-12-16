@@ -1,11 +1,11 @@
 // controllers/moviesController.js
-// ------------------------------------------------------
+// ..................................................
 // Movie endpoints
 // - GET /movies                 -> basic list (helper endpoint)
-// - GET /movies/:tconst         -> rich movie details
+// - GET /movies/:tconst         -> full movie details
 // - GET /movies/search?title=   -> Swagger search endpoint
 // - GET /movies/data/:imdbID    -> Swagger OMDb-style endpoint
-// ------------------------------------------------------
+// ...............................................
 
 const { pool } = require("../db/pool");
 
@@ -14,7 +14,7 @@ exports.getAllMovies = async (req, res, next) => {
   try {
     const { title, year, limit = 20, offset = 0 } = req.query;
 
-    // Start with a base query we can add filters to
+    // Start with a base query to add filters to
     let sql = `
       SELECT
         b.tconst,
@@ -59,7 +59,7 @@ exports.getMovieById = async (req, res, next) => {
   try {
     const { tconst } = req.params;
 
-    // 1) Basic movie + rating
+    // 1) Basic movie and rating
     const [movieRows] = await pool.query(
       `
       SELECT
@@ -122,7 +122,7 @@ exports.searchMovies = async (req, res, next) => {
   try {
     const { title, year, page = 1 } = req.query;
 
-    // Swagger: title is required
+    // Swagger: title required
     if (!title) {
       return res.status(400).json({
         error: true,
@@ -208,7 +208,7 @@ exports.getMovieData = async (req, res, next) => {
   try {
     const { imdbID } = req.params;
 
-    // Swagger: no query params allowed
+    // Swagger: no query parameterss allowed
     if (Object.keys(req.query).length > 0) {
       const invalidKey = Object.keys(req.query)[0];
       return res.status(400).json({
@@ -217,7 +217,7 @@ exports.getMovieData = async (req, res, next) => {
       });
     }
 
-    // 1) Basic movie fields + rating
+    // 1) Basic movie fields and rating
     const [movieRows] = await pool.query(
       `
       SELECT
